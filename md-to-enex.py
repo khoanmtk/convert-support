@@ -71,9 +71,17 @@ def convert_file_in_folder():
         convert_note(os.path.basename(input_file), lines)
 
 def handle_for_image(path):
-  image_string = ""
+  base64_image_string = ""
+  file_type = ""
+  image_string = "<resource>\n"
+  image_string += '<data encoding="base64">\n'
+  image_string += base64_image_string + "\n"
+  image_string += "</data>\n"
+  image_string += "<mime>image/" + file_type + "</mime>\n"
+  image_string += "</resource>\n"
+  print(image_string)
   return image_string
 
 # main call
 if __name__ == "__main__":
-    #convert_file_in_folder()
+    convert_file_in_folder()
