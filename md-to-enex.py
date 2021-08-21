@@ -3,7 +3,9 @@
 
 import os
 import glob
+import re
 from datetime import datetime
+import markdown
 
 def convert_note(file_name, lines):
     create_date = datetime.now().strftime("%Y%m%dT%H%M%SZ")
@@ -12,11 +14,18 @@ def convert_note(file_name, lines):
     # You may need to change to author to you
     author = "Khoan"
     content = ""
+    # create markdown object
+    md = markdown.Markdown()
+
     for i,line in enumerate(lines):
         if i == 0:
             title = line
         else:
-            paragraphs = '<p>' + line + '</p>'
+            match = re.search("(!\[.*\]\()(.*)(\))", line)
+            if match:
+              paragraphs = handle_for_image(match.group(2))
+            else:
+              paragraphs = md.convert(line)
             content = content + paragraphs
     xml_note = f"""
   <note>
@@ -44,7 +53,7 @@ def convert_note(file_name, lines):
     {xml_note}
     </en-export>
     """
-    write_enex("./Output", file_name, xml)
+    write_enex("./Output/", file_name, xml)
 
 # Write file to output folder
 def write_enex(output_folder, file_name, output_string):
@@ -61,6 +70,10 @@ def convert_file_in_folder():
         lines = f.readlines()
         convert_note(os.path.basename(input_file), lines)
 
+def handle_for_image(path):
+  image_string = ""
+  return image_string
+
 # main call
 if __name__ == "__main__":
-    convert_file_in_folder()
+    #convert_file_in_folder()

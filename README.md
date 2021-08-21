@@ -2,6 +2,15 @@
 
 Multiple tool for convert file
 
+
+## Install requirement
+
+Need to install requirement before using the script
+```console
+pip install -r requirements.txt
+```
+See the requirements.txt file to know which module need to be used
+
 ## md-to-enex.py
 
 Convert from markdown to Evernote format.
