@@ -5,12 +5,17 @@ import os
 import glob
 import re
 import base64
+import pathlib
 from datetime import datetime
 import markdown
 
 # Data to change before run the tool
+
 # You may need to change to author to you
 author = "Khoan"
+# if empty then export all file, if set as format %Y/%m/%d then export file >= that day
+export_from_date = ""
+# export_from_date = "2021/08/22"
 
 def convert_note(file_name, lines):
     create_date = datetime.now().strftime("%Y%m%dT%H%M%SZ")
@@ -69,9 +74,18 @@ def write_enex(output_folder, file_name, output_string):
 # Loop all md file in current folder, convert and write it to /Output/
 def convert_file_in_folder():
   for input_file in glob.glob("./*.md"):
-    with open(input_file, "r") as f:
-        lines = f.readlines()
-        convert_note(os.path.basename(input_file), lines)
+    export_flag = True
+    if export_from_date != "":
+      export_threshold = datetime.strptime(export_from_date, "%Y/%m/%d")
+      fname = pathlib.Path(input_file)
+      modify_time = datetime.fromtimestamp(fname.stat().st_mtime)
+      if modify_time < export_threshold:
+        export_flag = False
+      
+    if export_flag:
+      with open(input_file, "r") as f:
+          lines = f.readlines()
+          convert_note(os.path.basename(input_file), lines)
 
 def handle_for_image(path):
   base64_image_string = ""

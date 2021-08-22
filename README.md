@@ -21,7 +21,11 @@ Therefore I convert the md to enex, and import it to Evernote to backup, fast ac
 This script use for that.
 
 Time creation will be the time that run script, the author was default as me, you need customize below code before use it
+And to filter the exported md, you could filter by setting export_from_date, Then program will only export file that have modified day >=  that date.
 ``` python
-    # You may need to change to author to you
-    author = "Khoan"
+# You may need to change to author to you
+author = "Khoan"
+# if empty then export all file, if set as format %Y/%m/%d then export file with modified date >= that day
+export_from_date = ""
+# export_from_date = "2021/08/22"
 ```
