@@ -6,7 +6,7 @@ import glob
 import re
 import base64
 import pathlib
-from datetime import datetime
+from datetime import datetime, timedelta
 import markdown
 
 # Data to change before run the tool
@@ -19,8 +19,10 @@ export_from_date = ""
 # export_from_date = "2021/08/22"
 
 def convert_note(file_name, lines):
-    create_date = datetime.now().strftime("%Y%m%dT%H%M%SZ")
-    updated_date = datetime.now().strftime("%Y%m%dT%H%M%SZ")
+    # Decrease 1 days, to not effect today note
+    input_date = datetime.now() - timedelta(1)
+    create_date = input_date.strftime("%Y%m%dT%H%M%SZ")
+    updated_date = input_date.strftime("%Y%m%dT%H%M%SZ")
     tags = "MarkdownBackup"
     content = ""
     # create markdown object
