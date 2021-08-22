@@ -68,7 +68,7 @@ def write_enex(output_folder, file_name, output_string):
     if not os.path.isdir(output_folder):
         os.mkdir(output_folder)
     file_output = output_folder + file_name.replace(".md", ".enex")
-    with open(file_output, "w") as f:
+    with open(file_output, "w", encoding='utf-8') as f:
         f.write(output_string)
 
 # Loop all md file in current folder, convert and write it to /Output/
@@ -83,7 +83,7 @@ def convert_file_in_folder():
         export_flag = False
       
     if export_flag:
-      with open(input_file, "r") as f:
+      with open(input_file, "r", encoding='utf-8') as f:
           lines = f.readlines()
           convert_note(os.path.basename(input_file), lines)
 
