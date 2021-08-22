@@ -15,6 +15,7 @@ import markdown
 author = "Khoan"
 # if empty then export all file, if set as format %Y/%m/%d then export file >= that day
 export_from_date = ""
+# last export date as below
 # export_from_date = "2021/08/22"
 
 def convert_note(file_name, lines):
@@ -27,7 +28,7 @@ def convert_note(file_name, lines):
 
     for i,line in enumerate(lines):
         if i == 0:
-            title = line
+            title = line.replace("# ", "")
         else:
             match = re.search("(!\[.*\]\()(.*)(\))", line)
             if match:
@@ -57,7 +58,7 @@ def convert_note(file_name, lines):
 
     xml = f"""<?xml version="1.0" encoding="UTF-8"?>
     <!DOCTYPE en-export SYSTEM "http://xml.evernote.com/pub/evernote-export4.dtd">
-    <en-export export-date="{create_date}" application="Evernote" version="Evernote Mac 7.14 (458265)">
+    <en-export export-date="{create_date}" application="Evernote" version="10.19.2">
     {xml_note}
     </en-export>
     """
