@@ -4,15 +4,18 @@
 import os
 import glob
 import re
+import base64
 from datetime import datetime
 import markdown
+
+# Data to change before run the tool
+# You may need to change to author to you
+author = "Khoan"
 
 def convert_note(file_name, lines):
     create_date = datetime.now().strftime("%Y%m%dT%H%M%SZ")
     updated_date = datetime.now().strftime("%Y%m%dT%H%M%SZ")
     tags = "MarkdownBackup"
-    # You may need to change to author to you
-    author = "Khoan"
     content = ""
     # create markdown object
     md = markdown.Markdown()
@@ -72,14 +75,16 @@ def convert_file_in_folder():
 
 def handle_for_image(path):
   base64_image_string = ""
-  file_type = ""
-  image_string = "<resource>\n"
-  image_string += '<data encoding="base64">\n'
-  image_string += base64_image_string + "\n"
-  image_string += "</data>\n"
-  image_string += "<mime>image/" + file_type + "</mime>\n"
-  image_string += "</resource>\n"
-  print(image_string)
+  with open(path, "rb") as binary_file:
+    base64_encoded_data = base64.b64encode(binary_file.read())
+    base64_image_string = base64_encoded_data.decode("utf-8")
+
+  file_type = os.path.splitext(path)[1][1:].strip().lower()
+  # png is image/png, gif is image/gif, but jpg is image/jpeg
+  # therefore we need to update it in case jpg
+  file_type.replace("jpg","jpeg")
+
+  image_string = f'<img src="data:image/{file_type};base64,{base64_image_string}" />\n'
   return image_string
 
 # main call
