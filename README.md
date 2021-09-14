@@ -17,11 +17,11 @@ Convert from markdown to Evernote format.
 
 I use vs roam and obsidian to manage my knowledge. But I have problem when fast access it by phone.
 Evernote is good at searching and support multi platform. 
-Therefore I convert the md to enex, and import it to Evernote to backup, fast access and searching
+Therefore I convert the md to enex, and import it to Evernote to backup, fast access and searching.
 This script use for that.
 
-Time creation will be the time that run script, the author was default as me, you need customize below code before use it
-And to filter the exported md, you could filter by setting export_from_date, Then program will only export file that have modified day >=  that date.
+Time creation will be the time that run script, the author was default as me, you need customize below code before use it.
+To filter the exported md, you could filter by setting export_from_date, Then program will only export file that have modified day >=  that date.
 ``` python
 # You may need to change to author to you
 author = "Khoan"
