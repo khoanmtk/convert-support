@@ -15,7 +15,7 @@ See the requirements.txt file to know which module need to be used
 
 Convert from markdown to Evernote format.
 
-I use vs roam and obsidian to manage my knowledge. But I have problem when fast access it by phone.
+I use vs foam and obsidian to manage my knowledge. But I have problem when fast access it by phone.
 Evernote is good at searching and support multi platform. 
 Therefore I convert the md to enex, and import it to Evernote to backup, fast access and searching.
 This script use for that.
