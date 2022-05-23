@@ -13,7 +13,7 @@ See the requirements.txt file to know which module need to be used
 
 ## md-to-enex.py
 
-Convert from markdown to Evernote format.
+Convert Markdown to Evernote. md to enex
 
 I use vscode foam and obsidian to manage my knowledge. But I have problem when fast access it by phone.
 Evernote is good at searching and support multi platform. 
